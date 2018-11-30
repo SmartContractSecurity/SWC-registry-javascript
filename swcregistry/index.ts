@@ -1,6 +1,7 @@
 #!/usr/bin/env node
+import { XMLHttpRequest } from 'xmlhttprequest-ts';
+
 const fs = require("fs");
-const loadJsonFile = require('load-json-file');
 var json = require('./swc-definition.json');
 
 class SWCRegistry {
@@ -9,16 +10,22 @@ class SWCRegistry {
         this.content = json;
 
     }
-    public get_latest_version(){
+    async getPersonFullNameUsingAsync() {
+        let response = await fetch('https://raw.githubusercontent.com/SmartContractSecurity/SWC-registry/master/export/swc-definition.json');
+        this.content = await response.json();
+    }
+
+    public  get_latest_version(){
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", "https://raw.githubusercontent.com/SmartContractSecurity/SWC-registry/master/export/swc-definition.json", true);
 
         xmlhttp.onreadystatechange = function () {  
-        if (xmlhttp.readyState === 4) {  // request completed. we have some results
-            if (xmlhttp.status === 200) {  
-            console.log(xmlhttp.responseText)
+        if (xmlhttp.readyState === 4) {
+            if (xmlhttp.status === 200) {
+                this.content = xmlhttp.responseText;
+                console.log(">>>> update content - ", this.content);
             } else {  
-            console.log("Oops", xmlhttp.statusText);  
+                console.log("Oops", xmlhttp.statusText);  
             }  
         }  
         }; 
@@ -30,7 +37,8 @@ class SWCRegistry {
     }
 
     public update(){
-        return this.get_latest_version();
+        return this.getPersonFullNameUsingAsync();
+        // return this.get_latest_version();
     }
 }
 
@@ -56,7 +64,7 @@ export class SWC {
             console.log(`SWC with ID ${this.swc_id} does not exist`);
             return {}
         }
-        return entry.content[this.swc_id];
+        return entry.content[this.swc_id]['content'];
     }
 
     public title() {
@@ -72,3 +80,6 @@ export class SWC {
         return this.content()['Remediation']
     }
 }
+
+const swc = new SWC('SWC-100', true);
+console.log(swc.title());
