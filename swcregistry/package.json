@@ -19,5 +19,11 @@
         "isomorphic-fetch": "^2.2.1",
         "load-json-file": "^5.1.0",
         "xmlhttprequest-ts": "^1.0.1"
-    }
+    },
+    "scripts": {
+        "dev": "tsc -w",
+        "clean": "rm -rf node_modules/ && rm -rf package-lock.json && rm -r dist/",
+        "build:prod": "npm run clean && npm install && tsc index.ts && mkdir dist && mv index.js dist/ && cp package.json swc-definition.json dist/"
+    },
+    "author": "ersul4ik"
 }

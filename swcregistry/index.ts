@@ -2,69 +2,66 @@
 import { XMLHttpRequest } from 'xmlhttprequest-ts';
 
 const fs = require("fs");
-var json = require('./swc-definition.json');
+const fetch = require('node-fetch')
+const file_definition = require('./swc-definition.json');
 
 class SWCRegistry {
-    content: JSON;
-    constructor() {
-        this.content = json;
-
-    }
-    async getPersonFullNameUsingAsync() {
-        let response = await fetch('https://raw.githubusercontent.com/SmartContractSecurity/SWC-registry/master/export/swc-definition.json');
-        this.content = await response.json();
-    }
-
-    public  get_latest_version(){
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "https://raw.githubusercontent.com/SmartContractSecurity/SWC-registry/master/export/swc-definition.json", true);
-
-        xmlhttp.onreadystatechange = function () {  
-        if (xmlhttp.readyState === 4) {
-            if (xmlhttp.status === 200) {
-                this.content = xmlhttp.responseText;
-                console.log(">>>> update content - ", this.content);
-            } else {  
-                console.log("Oops", xmlhttp.statusText);  
-            }  
-        }  
-        }; 
-        xmlhttp.send(null); 
+    public update_file_content(content){
+        fs.writeFile("./swc-definition.json", JSON.stringify(content), (err) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            return;
+        });
     }
 
-    public load_from_file(){
-        return json
+    public get_latest_version(){
+        const url = 'https://raw.githubusercontent.com/SmartContractSecurity/SWC-registry/master/export/swc-definition.json';
+        fetch(url)
+            .then(res => res.json())
+            .then(res => {
+              this.update_file_content(res);
+              return;
+            })
+            .catch(res => {
+                throw new Error(res.statusText)
+        });
     }
-
-    public update(){
-        return this.getPersonFullNameUsingAsync();
-        // return this.get_latest_version();
+    public get_content_by_file(){
+        return file_definition;
     }
 }
 
-export class SWC {
+
+class SWC {
     /*
     SWC class contains information on an SWC entry
 
     Example usage:
         swc = new SWC('SWC-100')
         console.log(swc.title)
+    If you need a latest version of swc-definition.json file, use:
+        swc = new SWC('SWC-100')
+        swc.get_latest_version()
+        console.log(swc.title)
     */
     swc_id: string;
-    constructor(swc_id, get_last=false) {
+    constructor(swc_id) {
         this.swc_id = swc_id;
-        if (get_last){
-            new SWCRegistry().update();
-        }
+    }
+
+    public update(){
+        return new SWCRegistry().get_latest_version();
     }
 
     public content(){
         const entry = new SWCRegistry();
-        if (entry.content[this.swc_id] == undefined) {
+        if (entry.get_content_by_file()[this.swc_id] == undefined){
             console.log(`SWC with ID ${this.swc_id} does not exist`);
             return {}
         }
-        return entry.content[this.swc_id]['content'];
+        return entry.get_content_by_file()[this.swc_id]['content'];
     }
 
     public title() {
@@ -80,6 +77,3 @@ export class SWC {
         return this.content()['Remediation']
     }
 }
-
-const swc = new SWC('SWC-100', true);
-console.log(swc.title());
