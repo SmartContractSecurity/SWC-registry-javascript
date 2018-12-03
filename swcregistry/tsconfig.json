@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "lib": ["es5", "es6", "dom"],
+    "outDir": "lib",
+    "paths": {
+      "@src/*": ["src/*"],
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "**/__tests__/*"],
+}
