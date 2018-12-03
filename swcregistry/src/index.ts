@@ -28,7 +28,7 @@ class SWC {
     }
 
     public static update_file_content(content, done){
-        fs.writeFile("./swc-definition.json", JSON.stringify(content), (err) => {
+        fs.writeFile(__dirname + "swc-definition.json", JSON.stringify(content), (err) => {
             if (err) {
                 console.error(err);
                 done(err);
@@ -48,7 +48,7 @@ class SWC {
     }
 
     public content(){
-        const rawdata = JSON.parse(fs.readFileSync('./swc-definition.json'));  
+        const rawdata = JSON.parse(fs.readFileSync(__dirname + 'swc-definition.json'));  
         if (rawdata[this.swc_id] == undefined){
             console.log(`SWC with ID ${this.swc_id} does not exist`);
             return {}
@@ -69,3 +69,4 @@ class SWC {
         return this.content()['Remediation']
     }
 }
+export { SWC };

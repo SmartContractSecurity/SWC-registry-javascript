@@ -11,7 +11,11 @@
         "package"
     ],
     "devDependencies": {
-        "@types/node": "^10.12.10"
+        "@types/jest": "^23.3.10",
+        "@types/node": "^10.12.10",
+        "jest": "^23.6.0",
+        "ts-jest": "^23.10.5",
+        "typescript": "^3.2.1"
     },
     "dependencies": {
         "@types/es6-promise": "^3.3.0",
@@ -22,7 +26,8 @@
     },
     "scripts": {
         "dev": "tsc -w",
-        "clean": "rm -rf node_modules/ && rm -rf package-lock.json && rm -r dist/",
+        "test": "jest",
+        "clean": "rm -rf node_modules/ && rm -rf package-lock.json && rm -r dist",
         "build:prod": "npm run clean && npm install && tsc index.ts && mkdir dist && mv index.js dist/ && cp package.json swc-definition.json dist/"
     },
     "author": "ersul4ik"
