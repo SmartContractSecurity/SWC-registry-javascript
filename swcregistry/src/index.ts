@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import { XMLHttpRequest } from 'xmlhttprequest-ts';
 
-const fs = require("fs");
-const fetch = require('node-fetch')
+import fs = require('fs');
+import fetch = require('node-fetch');
 
 
 class SWC {
@@ -22,12 +22,12 @@ class SWC {
             }
         });
     */
-    swc_id: string;
-    constructor(swc_id) {
-        this.swc_id = swc_id;
+    private SWCID: string;
+    constructor(SWCID) {
+        this.SWCID = SWCID;
     }
 
-    public static update_file_content(content, done){
+    public update_file_content(content, done){
         fs.writeFile(__dirname + "swc-definition.json", JSON.stringify(content), (err) => {
             if (err) {
                 console.error(err);
@@ -43,30 +43,36 @@ class SWC {
         const url = 'https://raw.githubusercontent.com/SmartContractSecurity/SWC-registry/master/export/swc-definition.json';
         return fetch(url)
             .then(res => res.json())
-            .then(res => SWC.update_file_content(res, done))
+            .then(res => this.update_file_content(res, done))
             .catch(err => done(err));
     }
 
     public content(){
-        const rawdata = JSON.parse(fs.readFileSync(__dirname + 'swc-definition.json'));  
-        if (rawdata[this.swc_id] == undefined){
-            console.log(`SWC with ID ${this.swc_id} does not exist`);
+        const file = fs.readFileSync(__dirname + 'swc-definition.json');
+        const rawdata = JSON.parse(file.toString());
+        if (rawdata[this.SWCID] === undefined){
+            console.log(`SWC with ID ${this.SWCID} does not exist`);
             return {}
         }
-        return rawdata[this.swc_id]['content'];
+        const content = 'content';
+        return rawdata[this.SWCID][content];
     }
 
     public title() {
-        return this.content()['Title'];
+        const title = 'Title';
+        return this.content()[title];
     }
     public relationships(){
-        return this.content()['Relationships']
+        const relationships = 'Relationships';
+        return this.content()[relationships]
     }
     public description(){
-        return this.content()['Description']
+        const description = 'Description';
+        return this.content()[description]
     }
     public remediation(){
-        return this.content()['Remediation']
+        const remediation = 'Remediation';
+        return this.content()[remediation]
     }
 }
 export { SWC };

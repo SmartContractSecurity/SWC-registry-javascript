@@ -14,7 +14,10 @@
         "@types/jest": "^23.3.10",
         "@types/node": "^10.12.10",
         "jest": "^23.6.0",
+        "prettier": "^1.15.3",
         "ts-jest": "^23.10.5",
+        "tslint": "^5.11.0",
+        "tslint-config-prettier": "^1.17.0",
         "typescript": "^3.2.1"
     },
     "dependencies": {
@@ -28,7 +31,9 @@
         "dev": "tsc -w",
         "test": "jest",
         "clean": "rm -rf node_modules/ && rm -rf package-lock.json && rm -r dist",
-        "build:prod": "npm run clean && npm install && tsc index.ts && mkdir dist && mv index.js dist/ && cp package.json swc-definition.json dist/"
+        "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+        "lint": "tslint -p tsconfig.json",
+        "build": "tsc"
     },
     "author": "ersul4ik"
 }
