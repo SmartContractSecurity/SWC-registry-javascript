@@ -14,4 +14,4 @@ jobs:
             working_directory: swcregistry/
             command: |  
               npm install
-              npm run test
+              npm test
