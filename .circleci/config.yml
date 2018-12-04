@@ -10,8 +10,12 @@ jobs:
             working_directory: swcregistry/
             command: 'sudo npm install -g npm@latest'
         - run:
-            name: Test run
+            name: Install dependencies
             working_directory: swcregistry/
             command: |  
               npm install
+        - run:
+            name: Test run
+            working_directory: swcregistry/
+            command: |  
               npm test
