@@ -3,6 +3,9 @@ import { XMLHttpRequest } from 'xmlhttprequest-ts';
 
 import fs = require('fs');
 import fetch = require('node-fetch');
+import path = require('path');
+
+const dirString = path.dirname(fs.realpathSync(__filename));
 
 
 class SWC {
@@ -48,7 +51,7 @@ class SWC {
     }
 
     public content(){
-        const file = fs.readFileSync('swc-definition.json');
+        const file = fs.readFileSync(dirString + '/swc-definition.json');
         const rawdata = JSON.parse(file.toString());
         if (rawdata[this.SWCID] === undefined){
             console.log(`SWC with ID ${this.SWCID} does not exist`);
