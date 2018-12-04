@@ -2,27 +2,8 @@ import { SWC } from '../src';
 const fs = require("fs");
 
 describe('Checking SWC class methods', () => {
-    it('should update file swc-definition', () => {
-        fs.writeFile("src/swc-definition.json", {}, (err) => {
-            if (err) {
-                console.error(err);
-                return;
-            }
-            return;
-        });
-        const swc = new SWC('SWC-100')
-        swc.update(err => {
-            if(err) {
-                console.log(err);
-            } else {
-                console.log(swc.title());
-            }
-        });
-        const title = swc.title();
-        expect(title).toBe('Function Default Visibility');
-    });
     it('should get title of SWC', () => {
-        const swc = new SWC('SWC-100')
+        const swc = new SWC('SWC-100');
         const title = swc.title();
         expect(title).toBe('Function Default Visibility');
     });
