@@ -1,21 +1,19 @@
 version: 2
 jobs:
   build:
+    working_directory: swcregistry/
     docker:
       - image: circleci/node:4.8.2
     steps:
         - checkout
         - run:
             name: update-npm
-            working_directory: swcregistry/
             command: 'sudo npm install -g npm@latest'
         - run:
             name: Install dependencies
-            working_directory: swcregistry/
             command: |  
               npm install
         - run:
             name: Test run
-            working_directory: swcregistry/
             command: |  
               npm test
