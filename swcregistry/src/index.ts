@@ -27,14 +27,14 @@ class SWC {
         });
     */
     private SWCID: string;
-    private content: JSON;
+    private rawdata: JSON;
     constructor(SWCID) {
         this.SWCID = SWCID;
-        this.content = rawdata;
+        this.rawdata = rawdata;
     }
 
     public update_file_content(content, done){
-        this.content = content;
+        this.rawdata = content;
         fs.writeFile('swc-definition.json', JSON.stringify(content), (err) => {
             if (err) {
                 console.error(err);
@@ -55,16 +55,16 @@ class SWC {
     }
 
     public title() {
-        return this.content[this.SWCID]['content']['Title'];
+        return this.rawdata[this.SWCID]['content']['Title'];
     }
     public relationships(){
-        return this.content[this.SWCID]['content']['Relationships']
+        return this.rawdata[this.SWCID]['content']['Relationships']
     }
     public description(){
-        return this.content[this.SWCID]['content']['Description']
+        return this.rawdata[this.SWCID]['content']['Description']
     }
     public remediation(){
-        return this.content[this.SWCID]['content']['Remediation']
+        return this.rawdata[this.SWCID]['content']['Remediation']
     }
 }
 export { SWC };
