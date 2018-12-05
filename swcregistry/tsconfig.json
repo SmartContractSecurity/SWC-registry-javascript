@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src/",
+    "lib": ["es5", "es6", "dom"],
+    "outDir": "lib/",
+    "paths": {
+      "@src/*": ["src/*"],
+    }
+  },
+  "resolveJsonModule": true,
+  "esModuleInterop": true,
+  "include": ["src/"],
+  "exclude": ["node_modules", "**/__tests__/*"]
+}

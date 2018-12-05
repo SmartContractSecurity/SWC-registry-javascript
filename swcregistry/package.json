@@ -1,0 +1,43 @@
+{
+    "name": "@swcregistry/swc-registry-javascript",
+    "version": "1.0.1",
+    "description": "Python library for accessing SWC-registry content.",
+    "license": "MIT",
+    "repository": "SmartContractSecurity/SWC-registry-javascript",
+    "main": "lib/index.js",
+    "types": "src/index.ts",
+    "keywords": [
+        "swcregistry",
+        "npm",
+        "package"
+    ],
+    "files": ["lib/index.js", "lib/swc-definition.json"],
+    "devDependencies": {
+        "@types/jest": "^23.3.10",
+        "@types/node": "^10.12.10",
+        "jest": "^23.6.0",
+        "prettier": "^1.15.3",
+        "ts-jest": "^23.10.5",
+        "tslint": "^5.11.0",
+        "tslint-config-prettier": "^1.17.0",
+        "typescript": "^3.2.1"
+    },
+    "dependencies": {
+        "@types/es6-promise": "^3.3.0",
+        "es6-promise": "^4.2.5",
+        "isomorphic-fetch": "^2.2.1",
+        "load-json-file": "^5.1.0",
+        "ts-mockito": "^2.3.1",
+        "xmlhttprequest-ts": "^1.0.1"
+    },
+    "scripts": {
+        "build": "tsc && cp src/swc-definition.json lib/",
+        "test": "jest",
+        "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+        "prepare": "npm run build",
+        "prepublishOnly": "npm test",
+        "version": "npm run format && git add -A src",
+        "postversion": "git push && git push --tags"
+    },
+    "author": "ersul4ik"
+}
