@@ -1,5 +1,4 @@
 import { SWC } from '../src';
-const fs = require("fs");
 
 describe('Checking SWC class methods', () => {
     it('should get title of SWC', () => {
