@@ -4,6 +4,7 @@ import { XMLHttpRequest } from 'xmlhttprequest-ts';
 import fs = require('fs');
 import fetch = require('node-fetch');
 import path = require('path');
+const rawdata = require('./swc-definition.json');
 
 const dirString = path.dirname(fs.realpathSync(__filename));
 
@@ -26,11 +27,14 @@ class SWC {
         });
     */
     private SWCID: string;
+    private content: JSON;
     constructor(SWCID) {
         this.SWCID = SWCID;
+        this.content = rawdata;
     }
 
     public update_file_content(content, done){
+        this.content = content;
         fs.writeFile('swc-definition.json', JSON.stringify(content), (err) => {
             if (err) {
                 console.error(err);
@@ -50,27 +54,17 @@ class SWC {
             .catch(err => done(err));
     }
 
-    public content(){
-        const file = fs.readFileSync(dirString + '/swc-definition.json');
-        const rawdata = JSON.parse(file.toString());
-        if (rawdata[this.SWCID] === undefined){
-            console.log(`SWC with ID ${this.SWCID} does not exist`);
-            return {}
-        }
-        return rawdata[this.SWCID]['content'];
-    }
-
     public title() {
-        return this.content()['Title'];
+        return this.content[this.SWCID]['content']['Title'];
     }
     public relationships(){
-        return this.content()['Relationships']
+        return this.content[this.SWCID]['content']['Relationships']
     }
     public description(){
-        return this.content()['Description']
+        return this.content[this.SWCID]['content']['Description']
     }
     public remediation(){
-        return this.content()['Remediation']
+        return this.content[this.SWCID]['content']['Remediation']
     }
 }
 export { SWC };

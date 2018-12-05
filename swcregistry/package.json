@@ -31,13 +31,11 @@
         "xmlhttprequest-ts": "^1.0.1"
     },
     "scripts": {
-        "build": "tsc && cp swc-definition.json lib/",
+        "build": "tsc && cp src/swc-definition.json lib/",
         "test": "jest",
         "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-        "lint": "tslint -p tsconfig.json",
         "prepare": "npm run build",
-        "prepublishOnly": "npm test && npm run lint",
-        "preversion": "npm run lint",
+        "prepublishOnly": "npm test",
         "version": "npm run format && git add -A src",
         "postversion": "git push && git push --tags"
     },
