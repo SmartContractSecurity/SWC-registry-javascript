@@ -57,25 +57,20 @@ class SWC {
             console.log(`SWC with ID ${this.SWCID} does not exist`);
             return {}
         }
-        const content = 'content';
-        return rawdata[this.SWCID][content];
+        return rawdata[this.SWCID]['content'];
     }
 
     public title() {
-        const title = 'Title';
-        return this.content()[title];
+        return this.content()['Title'];
     }
     public relationships(){
-        const relationships = 'Relationships';
-        return this.content()[relationships]
+        return this.content()['Relationships']
     }
     public description(){
-        const description = 'Description';
-        return this.content()[description]
+        return this.content()['Description']
     }
     public remediation(){
-        const remediation = 'Remediation';
-        return this.content()[remediation]
+        return this.content()['Remediation']
     }
 }
 export { SWC };
