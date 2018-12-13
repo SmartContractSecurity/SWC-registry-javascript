@@ -1,6 +1,6 @@
 {
-    "name": "@swcregistry/swc-registry-javascript",
-    "version": "1.0.1",
+    "name": "@swcregistry/swc-registry",
+    "version": "1.0.0",
     "description": "Python library for accessing SWC-registry content.",
     "license": "MIT",
     "repository": "SmartContractSecurity/SWC-registry-javascript",
@@ -11,7 +11,10 @@
         "npm",
         "package"
     ],
-    "files": ["lib/index.js", "lib/swc-definition.json"],
+    "files": [
+        "lib/index.js",
+        "lib/swc-definition.json"
+    ],
     "devDependencies": {
         "@types/jest": "^23.3.10",
         "@types/node": "^10.12.10",
