@@ -14,17 +14,14 @@ jobs:
             - run:
                 name: Test run
                 command: cd swcregistry && npm test
-            - restore_cache:
-                key: node-modules-{{ checksum "package.json" }}
-            - save_cache:
-                key: node-modules-{{ checksum "package.json" }}
-                paths:
-                    - node_modules
     publish:
         docker:
             - image: circleci/node
         steps:
             - checkout
+            - run:
+                name: Install dependencies
+                command:  cd swcregistry && npm install
             - run:
                 name: Authenticate with registry
                 command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" >> ~/.npmrc
@@ -36,8 +33,8 @@ workflows:
   test-and-deploy:
     jobs:
       - test
-      - publish:
-        filters:
+      - deploy:
+          filters:
             branches:
               only: master
           requires:
