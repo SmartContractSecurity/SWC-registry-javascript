@@ -1,5 +1,5 @@
 {
-    "name": "@ersul4ik/swc-registry",
+    "name": "@ersul4ik/test-swc-registry",
     "version": "1.0.7",
     "description": "Python library for accessing SWC-registry content.",
     "license": "MIT",
