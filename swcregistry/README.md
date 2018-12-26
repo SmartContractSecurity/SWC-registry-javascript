@@ -6,7 +6,7 @@ JavaScript library for accessing SWC-registry content
 
 ## Example
 ```typescript
-const { SWC } = require('@swcregistry/swc-registry');
+const { SWC } = require('swc-registry');
 
 
 const swc = new SWC('SWC-100');
@@ -21,7 +21,7 @@ On first use of the SWC methods, the SWC registry is initialized from file (swc-
 
 ### Get latest version
 ```typescript
-const { SWC } = require('@swcregistry/swc-registry');
+const { SWC } = require('swc-registry');
 
 
 const swc = new SWC('SWC-100');
