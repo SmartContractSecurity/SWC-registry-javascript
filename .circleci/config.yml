@@ -14,6 +14,12 @@ jobs:
             - run:
                 name: Test run
                 command: cd swcregistry && npm test
+            - restore_cache:
+                key: node-modules-{{ checksum "package.json" }}
+            - save_cache:
+                key: node-modules-{{ checksum "package.json" }}
+                paths:
+                    - node_modules
     publish:
         docker:
             - image: circleci/node
@@ -31,7 +37,7 @@ workflows:
     jobs:
       - test
       - publish:
-          filters:
+        filters:
             branches:
               only: master
           requires:
