@@ -34,13 +34,12 @@
         "xmlhttprequest-ts": "^1.0.1"
     },
     "scripts": {
-        "build": "tsc && cp src/swc-definition.json lib/",
+        "build": "tsc && cp src/swc-definition.json lib/ && cp ../README.md ./",
         "test": "jest",
         "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-        "prepare": "npm run build",
+        "prepare": "npm run build && npm version patch",
         "prepublishOnly": "npm test",
-        "version": "npm run format && git add -A src",
-        "postversion": "git push && git push --tags"
+        "version": "npm run format"
     },
     "author": "ersul4ik"
 }

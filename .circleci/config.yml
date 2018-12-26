@@ -14,3 +14,6 @@ jobs:
         - run:
             name: Test run
             command: cd swcregistry && npm test
+        - run:
+            name: Publish to npmjs
+            command: npm publish
