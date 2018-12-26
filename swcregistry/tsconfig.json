@@ -1,37 +1,14 @@
 {
   "compilerOptions": {
     "baseUrl": "src/",
-    "lib": [
-      "es5",
-      "es6",
-      "esnext",
-      "dom"
-    ],
+    "lib": ["es5", "es6", "dom"],
     "outDir": "lib/",
     "paths": {
       "@src/*": ["src/*"],
-    },
-    "strictNullChecks": true, /* Enable strict null checks. */
-    "strictFunctionTypes": true, /* Enable strict checking of function types. */
-    "strictPropertyInitialization": true, /* Enable strict checking of property initialization in classes. */
-    "noImplicitThis": true, /* Raise error on 'this' expressions with an implied 'any' type. */
-    "alwaysStrict": true, /* Parse in strict mode and emit "use strict" for each source file. */
-    "noImplicitReturns": true,             /* Report error when not all code paths in function return a value. */
-
+    }
   },
   "resolveJsonModule": true,
   "esModuleInterop": true,
-  "include": [
-    "src/",
-    "config/config.json",
-    "plugins/**/*",
-    "package.json",
-    "maru.ts",
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts",
-    "node_modules/**/*",
-    "**/__tests__/*"
-  ]
+  "include": ["src/"],
+  "exclude": ["node_modules", "**/__tests__/*"]
 }
