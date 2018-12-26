@@ -30,7 +30,7 @@ workflows:
   test-and-deploy:
     jobs:
       - test
-      - deploy:
+      - publish:
           filters:
             branches:
               only: master
