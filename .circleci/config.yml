@@ -15,5 +15,8 @@ jobs:
             name: Test run
             command: cd swcregistry && npm test
         - run:
+            name: Authenticate with registry
+            command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
+        - run:
             name: Publish to npmjs
             command: cd swcregistry && npm publish
