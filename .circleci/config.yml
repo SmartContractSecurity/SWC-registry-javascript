@@ -1,16 +1,38 @@
 version: 2
 jobs:
-  build:
-    docker:
-      - image: circleci/node
-    steps:
-        - checkout
-        - run:
-            name: update-npm
-            command: 'sudo npm install -g npm@latest'
-        - run:
-            name: Install dependencies
-            command:  cd swcregistry && npm install
-        - run:
-            name: Test run
-            command: cd swcregistry && npm test
+    test:
+        docker:
+            - image: circleci/node
+        steps:
+            - checkout
+            - run:
+                name: update-npm
+                command: 'sudo npm install -g npm@latest'
+            - run:
+                name: Install dependencies
+                command:  cd swcregistry && npm install
+            - run:
+                name: Test run
+                command: cd swcregistry && npm test
+    publish:
+        docker:
+            - image: circleci/node
+        steps:
+            - checkout
+            - run:
+                name: Authenticate with registry
+                command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" >> ~/.npmrc
+            - run:
+                name: Publish to npmjs
+                command: cd swcregistry && npm run 2npm
+workflows:
+  version: 2
+  test-and-deploy:
+    jobs:
+      - test
+      - deploy:
+          filters:
+            branches:
+              only: master
+          requires:
+              - test

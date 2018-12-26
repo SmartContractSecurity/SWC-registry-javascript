@@ -1,6 +1,6 @@
 {
-    "name": "@swcregistry/swc-registry-javascript",
-    "version": "1.0.1",
+    "name": "@ersul4ik/test-swc-registry",
+    "version": "1.0.7",
     "description": "Python library for accessing SWC-registry content.",
     "license": "MIT",
     "repository": "SmartContractSecurity/SWC-registry-javascript",
@@ -11,7 +11,10 @@
         "npm",
         "package"
     ],
-    "files": ["lib/index.js", "lib/swc-definition.json"],
+    "files": [
+        "lib/index.js",
+        "lib/swc-definition.json"
+    ],
     "devDependencies": {
         "@types/jest": "^23.3.10",
         "@types/node": "^10.12.10",
@@ -31,13 +34,13 @@
         "xmlhttprequest-ts": "^1.0.1"
     },
     "scripts": {
-        "build": "tsc && cp src/swc-definition.json lib/",
+        "build": "tsc && cp src/swc-definition.json lib/ && cp ../README.md ./",
         "test": "jest",
         "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
         "prepare": "npm run build",
         "prepublishOnly": "npm test",
-        "version": "npm run format && git add -A src",
-        "postversion": "git push && git push --tags"
+        "2npm": "npm version patch && npm publish",
+        "version": "npm run format"
     },
     "author": "ersul4ik"
 }
