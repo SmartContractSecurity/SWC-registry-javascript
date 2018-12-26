@@ -39,7 +39,7 @@
         "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
         "prepare": "npm run build",
         "prepublishOnly": "npm test",
-        "publish": "npm version patch",
+        "2npm": "npm version patch && publish",
         "version": "npm run format && npm publish"
     },
     "author": "ersul4ik"
