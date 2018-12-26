@@ -30,10 +30,10 @@ jobs:
                 command: cd swcregistry && npm run 2npm
 workflows:
   version: 2
-  test-and-deploy:
+  test-and-publish:
     jobs:
       - test
-      - deploy:
+      - publish:
           filters:
             branches:
               only: master
