@@ -1,6 +1,6 @@
 {
-    "name": "swc-registry",
-    "version": "1.0.5",
+    "name": "@ersul4ik/swc-registry",
+    "version": "1.0.7",
     "description": "Python library for accessing SWC-registry content.",
     "license": "MIT",
     "repository": "SmartContractSecurity/SWC-registry-javascript",
@@ -40,7 +40,7 @@
         "prepare": "npm run build",
         "prepublishOnly": "npm test",
         "2npm": "npm version patch && publish",
-        "version": "npm run format && npm publish"
+        "version": "npm run format"
     },
     "author": "ersul4ik"
 }
