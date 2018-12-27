@@ -16,7 +16,7 @@
     "strictPropertyInitialization": true, /* Enable strict checking of property initialization in classes. */
     "noImplicitThis": true, /* Raise error on 'this' expressions with an implied 'any' type. */
     "alwaysStrict": true, /* Parse in strict mode and emit "use strict" for each source file. */
-    "noImplicitReturns": true,             /* Report error when not all code paths in function return a value. */
+    "noImplicitReturns": true, /* Report error when not all code paths in function return a value. */
 
   },
   "resolveJsonModule": true,
