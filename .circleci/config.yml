@@ -33,7 +33,7 @@ jobs:
                 command: |
                     git config --global user.email "$GIT_USER_EMAIL"
                     git config --global user.name "$GIT_USER"
-                    cd swcregistry && git add . && git commit -am "Changed the package version [skip ci]" && git push -q https://${GITHUB_TOKEN}@github.com/SmartContractSecurity/SWC-registry-javascript.git master
+                    cd swcregistry && git add . && git commit -am "Changed the package version [skip ci]" && git push -q https://${GITHUB_TOKEN}@github.com/ersul4ik/SWC-registry-javascript.git master
 workflows:
   version: 2
   test-and-publish:
