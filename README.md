@@ -1,7 +1,7 @@
 # SWC-registry-javascript
 [![CircleCI](https://circleci.com/gh/SmartContractSecurity/SWC-registry-javascript.svg?style=svg)](https://circleci.com/gh/SmartContractSecurity/SWC-registry-javascript)
 
-Python library for accessing SWC-registry content
+Javascript library for accessing SWC-registry content
 
 
 ## Example
