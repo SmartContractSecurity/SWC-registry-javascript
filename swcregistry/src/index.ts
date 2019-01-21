@@ -30,7 +30,7 @@ class SWC {
   private rawdata: JSON;
 
   constructor(SWCID) {
-    this.SWCID   = SWCID;
+    this.SWCID = SWCID;
     this.rawdata = rawdata;
   }
 

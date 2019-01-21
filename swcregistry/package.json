@@ -1,6 +1,6 @@
 {
     "name": "swc-registry",
-    "version": "1.0.10",
+    "version": "1.0.11",
     "description": "Javascript library for accessing SWC-registry content.",
     "license": "MIT",
     "repository": "SmartContractSecurity/SWC-registry-javascript",
