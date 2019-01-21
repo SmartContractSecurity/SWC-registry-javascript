@@ -4,6 +4,7 @@ import { XMLHttpRequest } from 'xmlhttprequest-ts';
 import fs = require('fs');
 import fetch = require('node-fetch');
 import path = require('path');
+
 const rawdata = require('./swc-definition.json');
 
 const dirString = path.dirname(fs.realpathSync(__filename));
@@ -27,8 +28,9 @@ class SWC {
     */
   private SWCID: string;
   private rawdata: JSON;
+
   constructor(SWCID) {
-    this.SWCID = SWCID;
+    this.SWCID   = SWCID;
     this.rawdata = rawdata;
   }
 
@@ -54,17 +56,33 @@ class SWC {
       .catch(err => done(err));
   }
 
+  private entry() {
+    return this.rawdata[this.SWCID];
+  }
+
   public title() {
-    return this.rawdata[this.SWCID]['content']['Title'];
+    const entry = this.entry();
+
+    return entry ? entry['content']['Title'] : null;
   }
+
   public relationships() {
-    return this.rawdata[this.SWCID]['content']['Relationships'];
+    const entry = this.entry();
+
+    return entry ? entry['content']['Relationships'] : null;
   }
+
   public description() {
-    return this.rawdata[this.SWCID]['content']['Description'];
+    const entry = this.entry();
+
+    return entry ? entry['content']['Description'] : null;
   }
+
   public remediation() {
-    return this.rawdata[this.SWCID]['content']['Remediation'];
+    const entry = this.entry();
+
+    return entry ? entry['content']['Remediation'] : null;
   }
 }
+
 export { SWC };

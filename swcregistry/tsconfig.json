@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": "src/",
     "lib": ["es5", "es6", "dom"],
+    "declaration": true,
     "outDir": "lib/",
     "paths": {
       "@src/*": ["src/*"],
