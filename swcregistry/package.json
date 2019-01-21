@@ -5,7 +5,7 @@
     "license": "MIT",
     "repository": "SmartContractSecurity/SWC-registry-javascript",
     "main": "lib/index.js",
-    "types": "src/index.ts",
+    "types": "lib/index.d.ts",
     "keywords": [
         "swcregistry",
         "npm",
