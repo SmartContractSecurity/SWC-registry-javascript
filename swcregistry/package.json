@@ -13,6 +13,7 @@
     ],
     "files": [
         "lib/index.js",
+        "lib/index.d.ts",
         "lib/swc-definition.json"
     ],
     "devDependencies": {
