@@ -3,11 +3,9 @@
 
 Javascript library for accessing SWC-registry content
 
-
 ## Example
 ```typescript
 import { SWC } from 'swc-registry';
-
 
 const swc: SWC = new SWC('SWC-100');
 
