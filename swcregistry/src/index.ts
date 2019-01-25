@@ -1,88 +1,69 @@
-#!/usr/bin/env node
-import { XMLHttpRequest } from 'xmlhttprequest-ts';
+import fs = require("fs");
+import fetch from "node-fetch";
 
-import fs = require('fs');
-import fetch = require('node-fetch');
-import path = require('path');
-
-const rawdata = require('./swc-definition.json');
-
-const dirString = path.dirname(fs.realpathSync(__filename));
+const dataPath = __dirname + '/swc-definition.json';
+const rawData = require(dataPath);
 
 class SWC {
-  /*
-    SWC class contains information on an SWC entry
+    private SWCID: string;
+    private rawData: JSON;
 
-    Example usage:
-        swc = new SWC('SWC-100')
-        console.log(swc.title)
-    If you need a latest version of swc-definition.json file, use:
-        const swc = new SWC('SWC-100');
-        swc.update(err => {
-            if(err) {
-                console.log(err);
+    constructor(SWCID: string) {
+        this.SWCID = SWCID;
+        this.rawData = rawData;
+    }
+
+    private updateFileContent(content: JSON, done: (error: Error | null) => void): void {
+        let callback = (err?: Error) => {
+            if (err) {
+                console.error(err);
+                done(err);
             } else {
-                console.log(swc.title());
+                done(null);
             }
-        });
-    */
-  private SWCID: string;
-  private rawdata: JSON;
+        };
 
-  constructor(SWCID) {
-    this.SWCID = SWCID;
-    this.rawdata = rawdata;
-  }
+        this.rawData = content;
 
-  public update_file_content(content, done) {
-    this.rawdata = content;
-    fs.writeFile('swc-definition.json', JSON.stringify(content), err => {
-      if (err) {
-        console.error(err);
-        done(err);
-        return;
-      }
-      done(null);
-      return;
-    });
-  }
+        fs.writeFile(dataPath, JSON.stringify(content), callback);
+    }
 
-  public update(done) {
-    const url =
-      'https://raw.githubusercontent.com/SmartContractSecurity/SWC-registry/master/export/swc-definition.json';
-    return fetch(url)
-      .then(res => res.json())
-      .then(res => this.update_file_content(res, done))
-      .catch(err => done(err));
-  }
+    public update(done: (error: Error | null) => void): void {
+        const url: string = 'https://raw.githubusercontent.com/SmartContractSecurity/SWC-registry/master/export/swc-definition.json';
 
-  private entry() {
-    return this.rawdata[this.SWCID];
-  }
+        fetch(url)
+            .then((response: any) => response.json())
+            .then((content: JSON) => this.updateFileContent(content, done))
+            .catch((error: Error) => done(error));
+    }
 
-  public title() {
-    const entry = this.entry();
+    private entry(): any {
+        return (this.rawData as any)[this.SWCID];
+    }
 
-    return entry ? entry['content']['Title'] : null;
-  }
+    public title(): string | null {
+        const entry = this.entry();
 
-  public relationships() {
-    const entry = this.entry();
+        return entry ? entry['content']['Title'] : null;
+    }
 
-    return entry ? entry['content']['Relationships'] : null;
-  }
+    public relationships(): string | null {
+        const entry = this.entry();
 
-  public description() {
-    const entry = this.entry();
+        return entry ? entry['content']['Relationships'] : null;
+    }
 
-    return entry ? entry['content']['Description'] : null;
-  }
+    public description(): string | null {
+        const entry = this.entry();
 
-  public remediation() {
-    const entry = this.entry();
+        return entry ? entry['content']['Description'] : null;
+    }
 
-    return entry ? entry['content']['Remediation'] : null;
-  }
+    public remediation(): string | null {
+        const entry = this.entry();
+
+        return entry ? entry['content']['Remediation'] : null;
+    }
 }
 
 export { SWC };

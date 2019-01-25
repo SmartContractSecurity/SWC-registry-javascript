@@ -6,10 +6,11 @@ Javascript library for accessing SWC-registry content
 
 ## Example
 ```typescript
-const { SWC } = require('swc-registry');
+import { SWC } from 'swc-registry';
 
 
-const swc = new SWC('SWC-100');
+const swc: SWC = new SWC('SWC-100');
+
 console.log(swc.title());
 
 // Function Default Visibility
@@ -21,17 +22,23 @@ On first use of the SWC methods, the SWC registry is initialized from file (swc-
 
 ### Get latest version
 ```typescript
-const { SWC } = require('swc-registry');
-
+import { SWC } from 'swc-registry';
 
 const swc = new SWC('SWC-100');
 
 swc.update(err => {
-if(err) {
-    console.log(err);
-} else {
-    console.log(swc.relationships());
-}});
+    if(err) {
+        console.log(err);
+    } else {
+        console.log(swc.relationships());
+    }
+});
 
 // [CWE-710: Improper Adherence to Coding Standards](https://cwe.mitre.org/data/definitions/710.html)
+```
+
+Update is also available via CLI command:
+
+```
+npm explore swc-registry -- npm run cli update
 ```
