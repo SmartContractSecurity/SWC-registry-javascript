@@ -1,43 +1,44 @@
-#!/usr/bin/env node
-
 import fs = require("fs");
 import fetch from "node-fetch";
 
-const rawdata = require('./swc-definition.json');
+const dataPath = __dirname + '/swc-definition.json';
+const rawData = require(dataPath);
 
 class SWC {
     private SWCID: string;
-    private rawdata: JSON;
+    private rawData: JSON;
 
     constructor(SWCID: string) {
         this.SWCID = SWCID;
-        this.rawdata = rawdata;
+        this.rawData = rawData;
     }
 
     private updateFileContent(content: JSON, done: (error: Error | null) => void): void {
-        this.rawdata = content;
-
-        fs.writeFile('swc-definition.json', JSON.stringify(content), (err?: Error) => {
+        let callback = (err?: Error) => {
             if (err) {
                 console.error(err);
                 done(err);
             } else {
                 done(null);
             }
-        });
+        };
+
+        this.rawData = content;
+
+        fs.writeFile(dataPath, JSON.stringify(content), callback);
     }
 
     public update(done: (error: Error | null) => void): void {
         const url: string = 'https://raw.githubusercontent.com/SmartContractSecurity/SWC-registry/master/export/swc-definition.json';
 
         fetch(url)
-          .then((response: any) => response.json())
-          .then((content: JSON) => this.updateFileContent(content, done))
-          .catch((error: Error) => done(error));
+            .then((response: any) => response.json())
+            .then((content: JSON) => this.updateFileContent(content, done))
+            .catch((error: Error) => done(error));
     }
 
     private entry(): any {
-        return (this.rawdata as any)[this.SWCID];
+        return (this.rawData as any)[this.SWCID];
     }
 
     public title(): string | null {
