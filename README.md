@@ -1,7 +1,7 @@
 # SWC-registry-javascript
 [![CircleCI](https://circleci.com/gh/SmartContractSecurity/SWC-registry-javascript.svg?style=svg)](https://circleci.com/gh/SmartContractSecurity/SWC-registry-javascript)
 
-Javascript library for accessing SWC-registry content
+Javascript library for accessing SWC-registry definitions. 
 
 ## Example
 ```typescript
@@ -16,7 +16,7 @@ console.log(swc.title());
 
 ## Behaviour
 
-On first use of the SWC methods, the SWC registry is initialized from file (swc-definition.json) out cache. If user want to get a latest information of SWC-registry he will have to use the update() method
+The repository contains an export from the SWC-registry (swc-definition.json). The latest version of the SWC-registry can be downloaded by using the `update()` method.
 
 ### Get latest version
 ```typescript
