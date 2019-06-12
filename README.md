@@ -1,42 +1,51 @@
 # SWC-registry-javascript
-[![CircleCI](https://circleci.com/gh/SmartContractSecurity/SWC-registry-javascript.svg?style=svg)](https://circleci.com/gh/SmartContractSecurity/SWC-registry-javascript)
+[![CircleCI](https://circleci.com/gh/SmartContractSecurity/SWC-registry-javascript.svg?style=svg)](https://circleci.com/gh/SmartContractSecurity/SWC-registry-javascript "CircleCI")
+[![npm version](http://img.shields.io/npm/v/swc-registry.svg?style=flat)](https://npmjs.org/package/swc-registry "View this project on npm")
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT "MIT")
 
-Javascript library for accessing SWC-registry definitions. 
+Javascript library for accessing an [SWC-registry](https://github.com/SmartContractSecurity/SWC-registry) entries.
 
-## Example
-```typescript
+## Installation
+
+* Global installation:
+```bash
+npm install -g swc-registry
+```
+
+* Installation as dependency:
+```bash
+npm install --save swc-registry
+```
+
+## Usage
+```javascript
 import { SWC } from 'swc-registry';
 
-const swc: SWC = new SWC('SWC-100');
+const swc = new SWC();
+const data = swc.getEntryData('SWC-100');
 
-console.log(swc.title());
-
-// Function Default Visibility
+if (data) {
+    console.log(data.Title, data.Relationships, data.Description, data.Remediation);
+} else {
+    throw new Error('Invalid SWC id');
+}
 ```
 
-## Behaviour
+## CLI mode
 
-The repository contains an export from the SWC-registry (swc-definition.json). The latest version of the SWC-registry can be downloaded by using the `update()` method.
+Library provides `swc-cli` executable for command-line interface. Usage examples:
 
-### Get latest version
-```typescript
-import { SWC } from 'swc-registry';
+```bash
+# Print manual
+swc-cli --help
 
-const swc = new SWC('SWC-100');
+# Download latest SWC-registry JSON snapshot
+swc-cli --update
 
-swc.update(err => {
-    if(err) {
-        console.log(err);
-    } else {
-        console.log(swc.relationships());
-    }
-});
-
-// [CWE-710: Improper Adherence to Coding Standards](https://cwe.mitre.org/data/definitions/710.html)
+# View markdown of specific SWC entry
+swc-cli --markdown SWC-100
 ```
 
-Update is also available via CLI command:
+## License
 
-```
-npm explore swc-registry -- npm run cli update
-```
+[MIT](http://opensource.org/licenses/MIT)

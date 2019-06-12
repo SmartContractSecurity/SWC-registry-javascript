@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "baseUrl": "src/",
+        "lib": ["es5", "es6", "dom"],
+        "declaration": true,
+        "outDir": "lib/",
+        "paths": {
+            "@src/*": ["src/*"],
+        },
+        "strict": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "strictPropertyInitialization": true,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true
+    },
+    "include": [ "src/" ],
+    "exclude": ["node_modules", "**/__tests__/*"]
+}

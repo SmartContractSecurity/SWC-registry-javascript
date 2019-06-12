@@ -6,14 +6,14 @@ jobs:
         steps:
             - checkout
             - run:
-                name: update-npm
+                name: Update npm
                 command: 'sudo npm install -g npm@latest'
             - run:
                 name: Install dependencies
-                command:  cd swcregistry && npm install
+                command: npm install
             - run:
                 name: Test run
-                command: cd swcregistry && npm test
+                command: npm test
     publish:
         docker:
             - image: circleci/node
@@ -21,20 +21,19 @@ jobs:
             - checkout
             - run:
                 name: Install dependencies
-                command:  cd swcregistry && npm install
+                command: npm install
             - run:
                 name: Authenticate with registry
                 command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" >> ~/.npmrc
             - run:
-                name: Publish to npmjs
-                command: |
-                    cd swcregistry && npm run 2npm
+                name: Publish to npm
+                command: npm version major && npm publish
             - run:
                 name: Push changes
                 command: |
                     git config --global user.email "$GIT_USER_EMAIL"
                     git config --global user.name "$GIT_USER"
-                    cd swcregistry && git add . && git commit -am "Changed the package version [skip ci]" && git push -q https://${GITHUB_TOKEN}@github.com/SmartContractSecurity/SWC-registry-javascript.git master
+                    git add . && git commit -am "Changed the package version [skip ci]" && git push -q https://${GITHUB_TOKEN}@github.com/SmartContractSecurity/SWC-registry-javascript.git master
 workflows:
   version: 2
   test-and-publish:
