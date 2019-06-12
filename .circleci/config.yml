@@ -26,14 +26,19 @@ jobs:
                 name: Authenticate with registry
                 command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" >> ~/.npmrc
             - run:
-                name: Publish to npm
-                command: npm version major && npm publish
-            - run:
-                name: Push changes
+                name: Configure git
                 command: |
                     git config --global user.email "$GIT_USER_EMAIL"
                     git config --global user.name "$GIT_USER"
-                    git add . && git commit -am "Changed the package version [skip ci]" && git push -q https://${GITHUB_TOKEN}@github.com/SmartContractSecurity/SWC-registry-javascript.git master
+            - run:
+                name: Publish to npm
+                command: npm version patch && npm publish
+            - run:
+                name: Push changes
+                command: |
+                    git add .
+                    git commit -am "Changed the package version [skip ci]"
+                    git push -q https://${GITHUB_TOKEN}@github.com/SmartContractSecurity/SWC-registry-javascript.git master
 workflows:
   version: 2
   test-and-publish:
