@@ -9,7 +9,7 @@ Javascript library for accessing an [SWC-registry](https://github.com/SmartContr
 
 * Global installation:
 ```bash
-npm install -g swc-registry;
+npm install -g swc-registry
 ```
 
 * Installation as dependency:

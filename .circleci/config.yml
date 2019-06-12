@@ -6,7 +6,7 @@ jobs:
         steps:
             - checkout
             - run:
-                name: update-npm
+                name: Update npm
                 command: 'sudo npm install -g npm@latest'
             - run:
                 name: Install dependencies
@@ -26,8 +26,8 @@ jobs:
                 name: Authenticate with registry
                 command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" >> ~/.npmrc
             - run:
-                name: Publish to npmjs
-                command: npm version patch && npm publish
+                name: Publish to npm
+                command: npm version major && npm publish
             - run:
                 name: Push changes
                 command: |
