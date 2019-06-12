@@ -27,7 +27,7 @@ jobs:
                 command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" >> ~/.npmrc
             - run:
                 name: Publish to npmjs
-                command: npm run 2npm
+                command: npm version patch && npm publish
             - run:
                 name: Push changes
                 command: |

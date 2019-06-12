@@ -3,7 +3,7 @@ import fs = require('fs');
 import fetch from 'node-fetch';
 import { SWC } from '.';
 
-const [,, ...args] = process.argv;
+const [, , ...args] = process.argv;
 
 interface HandlerInterface {
     (...args: (string | undefined)[]): void;
@@ -13,8 +13,8 @@ interface HandlerMapInterface {
     [handler: string]: HandlerInterface;
 }
 
-const commands: HandlerMapInterface = {
-    "--update": () => {
+const handlers: HandlerMapInterface = {
+    '--update': () => {
         const url =
             'https://raw.githubusercontent.com/SmartContractSecurity/SWC-registry/master/export/swc-definition.json';
 
@@ -29,9 +29,9 @@ const commands: HandlerMapInterface = {
             .catch(error => callback(error));
     },
 
-    "--markdown": id => {
+    '--markdown': id => {
         if (id === undefined) {
-            console.log("Specify valid SWC entry ID");
+            console.log('Specify valid SWC entry ID');
         } else {
             const swc = new SWC();
             const doc = swc.getEntryMarkDown(id);
@@ -40,11 +40,12 @@ const commands: HandlerMapInterface = {
         }
     },
 
-    "--help": () => {
+    '--help': () => {
         const message = [
             'Javascript library for accessing SWC-registry entries.',
             '',
             'Options:',
+            '  --help           Prints this message.',
             '  --update         Downloads the latest version of the SWC-registry JSON snapshot.',
             '  --markdown <id>  Prints markdown of SWC with specified ID.'
         ].join('\n');
@@ -53,12 +54,10 @@ const commands: HandlerMapInterface = {
     }
 };
 
-const command = args.shift() || '--help';
+const option = args.shift() || '--help';
 
-if (command in commands) {
-    const handler = commands[command];
-
-    handler(...args);
+if (option in handlers) {
+    handlers[option](...args);
 } else {
-    console.log('List of supported options: ' + Object.keys(commands).join(', '));
+    console.log('List of supported options: ' + Object.keys(handlers).join(', '));
 }

@@ -45,8 +45,7 @@
         "swc:update": "lib/cli.js update && cp lib/swc-definition.json src/",
         "test": "jest",
         "prepare": "npm run build",
-        "prepublishOnly": "npm test",
-        "2npm": "npm version patch && npm publish"
+        "prepublishOnly": "npm test"
     },
     "author": "ersul4ik",
     "license": "MIT"
