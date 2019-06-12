@@ -1,6 +1,6 @@
 {
     "name": "swc-registry",
-    "version": "1.0.16",
+    "version": "2.0.0",
     "description": "Javascript library for accessing SWC-registry content.",
     "repository": "SmartContractSecurity/SWC-registry-javascript",
     "main": "lib/index.js",
