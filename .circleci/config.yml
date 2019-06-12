@@ -31,14 +31,14 @@ jobs:
                     git config --global user.email "$GIT_USER_EMAIL"
                     git config --global user.name "$GIT_USER"
             - run:
-                name: Publish to npm
-                command: npm version patch && npm publish
+                name: Patch package version
+                command: npm version patch
             - run:
-                name: Push changes
-                command: |
-                    git add .
-                    git commit -am "Changed the package version [skip ci]"
-                    git push -q https://${GITHUB_TOKEN}@github.com/SmartContractSecurity/SWC-registry-javascript.git master
+                name: Push changes to the git repository
+                command: git add . && git commit -am "Changed the package version [skip ci]" && git push -q https://${GITHUB_TOKEN}@github.com/SmartContractSecurity/SWC-registry-javascript.git master
+            - run:
+                name: Publish package to npm
+                command: npm publish
 workflows:
   version: 2
   test-and-publish:
