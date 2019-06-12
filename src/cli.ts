@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 import fs = require('fs');
 import fetch from 'node-fetch';
+import { SWC } from '.';
 
-const [, , ...args] = process.argv;
+const [,, ...args] = process.argv;
 
 interface HandlerInterface {
-    (...args: string[]): void;
+    (...args: (string | undefined)[]): void;
 }
 
 interface HandlerMapInterface {
@@ -13,7 +14,7 @@ interface HandlerMapInterface {
 }
 
 const commands: HandlerMapInterface = {
-    update: () => {
+    "--update": () => {
         const url =
             'https://raw.githubusercontent.com/SmartContractSecurity/SWC-registry/master/export/swc-definition.json';
 
@@ -26,15 +27,38 @@ const commands: HandlerMapInterface = {
             .then(response => response.json())
             .then(content => fs.writeFile(fileName, JSON.stringify(content), callback))
             .catch(error => callback(error));
+    },
+
+    "--markdown": id => {
+        if (id === undefined) {
+            console.log("Specify valid SWC entry ID");
+        } else {
+            const swc = new SWC();
+            const doc = swc.getEntryMarkDown(id);
+
+            console.log(doc ? doc : `No SWC entry found for ID "${id}"`);
+        }
+    },
+
+    "--help": () => {
+        const message = [
+            'Javascript library for accessing SWC-registry entries.',
+            '',
+            'Options:',
+            '  --update         Downloads the latest version of the SWC-registry JSON snapshot.',
+            '  --markdown <id>  Prints markdown of SWC with specified ID.'
+        ].join('\n');
+
+        console.log(message);
     }
 };
 
-const command: string | undefined = args.shift();
+const command = args.shift() || '--help';
 
-if (command && command in commands) {
+if (command in commands) {
     const handler = commands[command];
 
     handler(...args);
 } else {
-    console.log('List of supported commands: ' + Object.keys(commands).join(', '));
+    console.log('List of supported options: ' + Object.keys(commands).join(', '));
 }
