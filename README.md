@@ -1,8 +1,6 @@
 # SWC-registry-javascript
 [![CircleCI](https://circleci.com/gh/SmartContractSecurity/SWC-registry-javascript.svg?style=svg)](https://circleci.com/gh/SmartContractSecurity/SWC-registry-javascript "CircleCI")
-
 [![npm version](http://img.shields.io/npm/v/swc-registry.svg?style=flat)](https://npmjs.org/package/swc-registry "View this project on npm")
-
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT "MIT")
 
 Javascript library for accessing an [SWC-registry](https://github.com/SmartContractSecurity/SWC-registry) entries.
