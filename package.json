@@ -42,7 +42,7 @@
         "clean": "rm -rf lib/ && rm -rf node_modules/",
         "build": "tsc && cp src/swc-definition.json lib/ && cp README.md lib/ && chmod +x lib/cli.js",
         "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-        "swc:update": "lib/cli.js update && cp lib/swc-definition.json src/",
+        "swc:update": "lib/cli.js --update && cp lib/swc-definition.json src/",
         "test": "jest",
         "prepare": "npm run build",
         "prepublishOnly": "npm test"
