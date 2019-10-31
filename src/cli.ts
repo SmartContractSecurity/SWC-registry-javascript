@@ -19,7 +19,7 @@ const handlers: HandlerMapInterface = {
             'https://raw.githubusercontent.com/SmartContractSecurity/SWC-registry/master/export/swc-definition.json';
 
         const fileName = __dirname + '/swc-definition.json';
-        const callback = (error?: Error) => {
+        const callback = (error: Error | null) => {
             console.log(error ? error : 'SWC dictionary was successfully updated');
         };
 
