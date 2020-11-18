@@ -32,7 +32,9 @@ jobs:
                     git config --global user.name "$GIT_USER"
             - run:
                 name: Patch package version
-                command: npm version patch -m "Changed the package version to %s [skip ci]"
+                command: |
+                    git status
+                    npm version patch -m "Changed the package version to %s [skip ci]"
             - run:
                 name: Push changes to the git repository
                 command: git push -q https://${GITHUB_TOKEN}@github.com/SmartContractSecurity/SWC-registry-javascript.git master
