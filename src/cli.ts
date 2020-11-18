@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-import fs = require('fs');
-import fetch from 'node-fetch';
+import fse from 'fs-extra';
+import axios from 'axios';
 import { SWC } from '.';
 
 const [, , ...args] = process.argv;
 
 interface HandlerInterface {
-    (...args: (string | undefined)[]): void;
+    (...args: Array<string | undefined>): void;
 }
 
 interface HandlerMapInterface {
@@ -14,19 +14,19 @@ interface HandlerMapInterface {
 }
 
 const handlers: HandlerMapInterface = {
-    '--update': () => {
-        const url =
-            'https://raw.githubusercontent.com/SmartContractSecurity/SWC-registry/master/export/swc-definition.json';
+    '--update': async () => {
+        const response = await axios({
+            method: 'GET',
 
-        const fileName = __dirname + '/swc-definition.json';
-        const callback = (error: Error | null) => {
-            console.log(error ? error : 'SWC dictionary was successfully updated');
-        };
+            url:
+                'https://raw.githubusercontent.com/SmartContractSecurity/SWC-registry/master/export/swc-definition.json',
 
-        fetch(url)
-            .then(response => response.json())
-            .then(content => fs.writeFile(fileName, JSON.stringify(content), callback))
-            .catch(error => callback(error));
+            responseType: 'json'
+        });
+
+        await fse.writeFile(__dirname + '/swc-definition.json', JSON.stringify(response.data));
+
+        console.log('SWC dictionary was successfully updated');
     },
 
     '--markdown': id => {

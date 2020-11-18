@@ -6,11 +6,11 @@ jobs:
         steps:
             - checkout
             - run:
-                name: Update npm
-                command: 'sudo npm install -g npm@latest'
-            - run:
                 name: Install dependencies
                 command: npm install
+            - run:
+                name: Linting
+                command: npm run lint
             - run:
                 name: Test run
                 command: npm test
