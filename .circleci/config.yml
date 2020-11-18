@@ -34,6 +34,7 @@ jobs:
                 name: Patch package version
                 command: |
                     git status
+                    git checkout -- .
                     npm version patch -m "Changed the package version to %s [skip ci]"
             - run:
                 name: Push changes to the git repository
