@@ -7,18 +7,17 @@ Javascript library for accessing an [SWC-registry](https://github.com/SmartContr
 
 ## Installation
 
-* Global installation:
-```bash
-npm install -g swc-registry
-```
-
-* Installation as dependency:
-```bash
-npm install --save swc-registry
-```
+-   Global installation:
+    ```console
+    npm install -g swc-registry
+    ```
+-   Installation as dependency:
+    ```console
+    npm install --save swc-registry
+    ```
 
 ## Usage
-```javascript
+```typescript
 import { SWC } from 'swc-registry';
 
 const swc = new SWC();
@@ -35,16 +34,18 @@ if (data) {
 
 Library provides `swc-cli` executable for command-line interface. Usage examples:
 
-```bash
-# Print manual
-swc-cli --help
-
-# Download latest SWC-registry JSON snapshot
-swc-cli --update
-
-# View markdown of specific SWC entry
-swc-cli --markdown SWC-100
-```
+-   Print manual:
+    ```console
+    swc-cli --help
+    ```
+-   Download latest SWC-registry JSON snapshot:
+    ```console
+    swc-cli --update
+    ```
+-   View markdown of specific SWC entry:
+    ```console
+    swc-cli --markdown SWC-100
+    ```
 
 ## License
 

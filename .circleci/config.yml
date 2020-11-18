@@ -12,6 +12,9 @@ jobs:
                 name: Install dependencies
                 command: npm install
             - run:
+                name: Linting
+                command: npm run lint
+            - run:
                 name: Test run
                 command: npm test
     publish:
