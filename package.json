@@ -20,18 +20,18 @@
         "lib/swc-definition.json"
     ],
     "devDependencies": {
-        "@types/fs-extra": "^9.0.4",
-        "@types/jest": "^26.0.15",
-        "@types/node": "^12.19.5",
-        "jest": "^26.6.3",
-        "prettier": "^2.1.2",
-        "ts-jest": "^26.4.4",
-        "@typescript-eslint/eslint-plugin": "^4.8.1",
-        "@typescript-eslint/parser": "^4.8.1",
-        "eslint": "^7.13.0",
-        "eslint-config-prettier": "^6.15.0",
-        "eslint-plugin-prettier": "^3.1.4",
-        "typescript": "^4.0.5"
+        "@types/fs-extra": "^9.0.12",
+        "@types/jest": "^26.0.24",
+        "@types/node": "^12.20.15",
+        "@typescript-eslint/eslint-plugin": "^4.28.2",
+        "@typescript-eslint/parser": "^4.28.2",
+        "eslint": "^7.30.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^3.4.0",
+        "jest": "^27.0.6",
+        "prettier": "^2.3.2",
+        "ts-jest": "^27.0.3",
+        "typescript": "^4.3.5"
     },
     "scripts": {
         "assets:copy": "cp src/swc-definition.json lib/ && cp README.md lib/",
