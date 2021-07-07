@@ -18,8 +18,7 @@ const handlers: HandlerMapInterface = {
         const response = await axios({
             method: 'GET',
 
-            url:
-                'https://raw.githubusercontent.com/SmartContractSecurity/SWC-registry/master/export/swc-definition.json',
+            url: 'https://raw.githubusercontent.com/SmartContractSecurity/SWC-registry/master/export/swc-definition.json',
 
             responseType: 'json'
         });
